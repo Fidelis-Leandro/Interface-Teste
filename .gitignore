@@ -1,0 +1,28 @@
+# Ambiente Python e cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Dados locais: banco, pontos da mão, configurações (nunca publicar dados de pacientes)
+dados_locais/
+relatorios/
+copias_de_seguranca/
+*.sqlite
+*.sqlite-journal
+
+# Modelo do MediaPipe (baixado pelo "Instalar sistema.bat")
+hand_landmarker.task
+
+# Modelo MANO: a licença não permite redistribuir (cada pessoa baixa o seu)
+assets/mano/*.pkl
+assets/mano/*.npz
+assets/mano/*.zip
+assets/mano/calibracao_mao_aberta.json
+
+# Sistema e editores
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

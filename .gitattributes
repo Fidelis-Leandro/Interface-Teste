@@ -1,0 +1,8 @@
+# Fim de linha: o Git normaliza os textos; os .bat ficam sempre no formato do Windows (CRLF),
+# senão o cmd pode se perder nos rótulos (goto) em computadores com outra configuração.
+* text=auto
+*.bat text eol=crlf
+*.py text eol=lf
+*.md text
+*.npz binary
+*.png binary

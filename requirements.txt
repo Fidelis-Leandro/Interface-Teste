@@ -1,0 +1,11 @@
+# Pacotes do sistema, nas versões testadas com Python 3.11.9 (64 bits) no Windows 11.
+# Instalação automática: "Instalar sistema.bat". Manual:
+#     .venv\Scripts\python.exe -m pip install -r requirements.txt
+PyQt5==5.15.11
+pyqtgraph==0.14.0
+PyOpenGL==3.1.10   # necessário para pyqtgraph.opengl (GLViewWidget)
+numpy==2.4.6
+
+# Câmera (sem eles, só funciona a mão simulada: sistema.py --sim)
+mediapipe==1.0.1
+opencv-contrib-python==5.0.0.93   # já vem como dependência do mediapipe; não instale opencv-python junto

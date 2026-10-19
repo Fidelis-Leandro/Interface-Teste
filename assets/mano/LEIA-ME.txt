@@ -1,0 +1,25 @@
+Arquivos do modelo MANO (pele da mão 3D) - NÃO vêm com este projeto.
+
+A licença do MANO (Max-Planck) é de pesquisa NÃO comercial e não permite
+redistribuir os arquivos: cada pessoa baixa com a própria conta.
+
+Jeito fácil
+1. Crie uma conta em https://mano.is.tue.mpg.de e aceite a licença.
+2. Em "Download", baixe "Models & Code" (mano_v1_2.zip) para a pasta Downloads.
+3. Dê dois cliques em Instalar mao 3D.bat (na pasta principal do projeto).
+   Ele acha o zip em Downloads, copia os 2 arquivos necessários para esta
+   pasta e já faz a conversão. Se o zip estiver em outro lugar, arraste o zip
+   sobre o Instalar mao 3D.bat.
+4. Abra o sistema de novo.
+
+Jeito manual
+   Dentro do zip, em mano_v1_2/models/, copie para ESTA pasta:
+       MANO_RIGHT.pkl
+       MANO_LEFT.pkl
+   Na 1ª execução os .pkl são convertidos para mano_right.npz / mano_left.npz.
+
+Sem estes arquivos o sistema funciona e mede normalmente; só a mão 3D não
+aparece (a tela de avaliação mostra um aviso no lugar dela).
+
+Para testar a conversão e a cinemática inversa com os arquivos reais:
+    .venv\Scripts\python.exe tools\test_hand_skin.py
