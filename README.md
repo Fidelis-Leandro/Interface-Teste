@@ -43,7 +43,8 @@ permite redistribuir os arquivos, então **cada pessoa baixa com a própria cont
 
 1. Crie uma conta em <https://mano.is.tue.mpg.de> e aceite a licença.
 2. Em **Download**, baixe **Models & Code** (`mano_v1_2.zip`) para a pasta Downloads.
-3. Dê dois cliques em **`Instalar mao 3D.bat`**.
+3. Dê dois cliques em **`Instalar mao 3D.bat`** (ele acha o zip em Downloads, mesmo descompactado ou dentro
+   do OneDrive), ou peça ao Claude: *"Baixei o MANO, instale a mão 3D seguindo o passo 7 do INSTALACAO.md."*
 
 Sem o MANO o sistema funciona e mede normalmente; só a mão 3D não aparece (a tela mostra um aviso no lugar).
 

@@ -100,22 +100,52 @@ Esperado: cinco linhas `ok` e `Todos os testes passaram.` Sem o MANO, o teste da
 Esperado: EX-001 (5 avaliações), João (8) e Maria (9). Rodar de novo não duplica. Os dados ficam em
 `dados_locais\`.
 
-### 7. Mão 3D (opcional, feito pela pessoa)
+### 7. Mão 3D com o modelo MANO (opcional; o download é feito pela pessoa)
 
-Explique para a pessoa:
+A tela de avaliação mostra uma mão 3D com pele usando o modelo **MANO** (Max-Planck). A licença não permite
+redistribuir os arquivos, então eles **não estão no repositório** e **você não pode baixá-los**: o download
+exige conta e aceite de licença pela própria pessoa. Sem o MANO o sistema mede normalmente e mostra, no lugar
+da mão 3D, o aviso "Mão 3D não instalada (modelo MANO)".
 
-1. Criar uma conta em <https://mano.is.tue.mpg.de> e aceitar a licença (uso acadêmico, não comercial).
-2. Em **Download**, baixar **Models & Code** (`mano_v1_2.zip`) para a pasta Downloads.
-3. Avisar você quando terminar.
+**7a. O que pedir para a pessoa fazer** (copie estas instruções para ela):
 
-Depois rode:
+1. Abrir <https://mano.is.tue.mpg.de>, clicar em **Sign Up**, criar a conta (gratuita, uso acadêmico) e
+   confirmar o e-mail.
+2. Entrar (**Sign In**), abrir a página **Download** e aceitar a licença.
+3. Baixar o item **"Models & Code"**: é o arquivo **`mano_v1_2.zip`**. Os outros downloads do site (por
+   exemplo, os do SMPL+H) **não** servem.
+4. Deixar o arquivo na pasta **Downloads** (não precisa descompactar) e avisar quando terminar.
+
+**7b. Quando a pessoa avisar que baixou, rode:**
 
 ```powershell
 .venv\Scripts\python.exe tools\instalar_mano.py
 ```
 
-(ou passe o caminho do zip: `tools\instalar_mano.py C:\caminho\mano_v1_2.zip`). Esperado:
-`Mão 3D instalada.` Rode `tools\testar.py` de novo: o teste da mão 3D agora verifica os arquivos reais.
+O script procura sozinho, em `Downloads` e em `OneDrive*\Downloads`, o `mano_v1_2*.zip` **ou** a pasta
+`mano_v1_2` já descompactada. Ele copia só os dois arquivos necessários (`MANO_RIGHT.pkl` e
+`MANO_LEFT.pkl`) para `assets\mano\`, converte para `mano_right.npz` / `mano_left.npz` e confere que o
+modelo carrega.
+
+- Esperado: `Mão 3D instalada e verificada.`
+- `Não encontrei o mano_v1_2.zip...`: procure o arquivo e passe o caminho (zip ou pasta):
+
+  ```powershell
+  Get-ChildItem $env:USERPROFILE -Recurse -Filter "mano_v1_2*" -ErrorAction SilentlyContinue | Select-Object FullName
+  .venv\Scripts\python.exe tools\instalar_mano.py "C:\caminho\encontrado\mano_v1_2.zip"
+  ```
+
+- `Não achei MANO_RIGHT.pkl dentro de ...`: o arquivo baixado não é o "Models & Code". Peça para a pessoa
+  baixar o item certo (7a, passo 3).
+
+**7c. Confirmar que funcionou:**
+
+1. `.venv\Scripts\python.exe tools\testar.py`: todos `ok`. O teste `test_hand_skin.py` agora mostra
+   linhas `[MANO right]` e `[MANO left]` com "IK em 200 poses aleatórias" (antes dizia "pulando").
+2. Abra o sistema (`sistema.py --sim` serve) e inicie uma avaliação: a mão 3D com pele aparece no palco e
+   o aviso "Mão 3D não instalada" some. Se o sistema já estava aberto, feche e abra de novo.
+
+Não envie os arquivos do MANO para nenhum lugar (o `.gitignore` já impede que entrem no Git).
 
 ### 8. Abrir o sistema
 
@@ -141,6 +171,7 @@ README.md.
 | O `.bat` abre e fecha, ou a janela não aparece | Rode pelo terminal para ver a mensagem: `.venv\Scripts\python.exe sistema.py --sim`. |
 | `não consegui abrir a câmera 0` | Outra câmera: `sistema.py --cam 1`. Feche outros programas que usam a câmera (Teams, Zoom). Verifique a permissão de câmera do Windows (Configurações > Privacidade > Câmera). |
 | Erro de OpenGL / tela 3D preta | Atualize o driver de vídeo. As medidas funcionam mesmo sem a mão 3D. |
+| Mão 3D não aparece depois de instalar o MANO | Feche e abra o sistema. Confira se existem `assets\mano\mano_right.npz` e `mano_left.npz`; se não, rode o passo 7b de novo. |
 | Download do `hand_landmarker.task` falha | Baixe manualmente de `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task` e coloque na pasta do projeto. |
 | A interface aparece muito pequena ou grande | Em Configurações > Interface > Tamanho (vale ao reiniciar). |
 
